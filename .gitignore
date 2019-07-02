@@ -1,0 +1,4 @@
+node_modules
+package-lock.json
+POS_temp_db.json
+Sitef_temp_db.json
