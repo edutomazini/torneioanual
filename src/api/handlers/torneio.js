@@ -5,7 +5,7 @@ async function getTorneio (id) {
     try {
       const torneio = db.select('*').from('torneio').modify(function (queryBuilder) {
         if (id !== undefined) {
-          queryBuilder.where('id', id);
+          queryBuilder.where('id', id)
         }
       })
         .then(function (results) {

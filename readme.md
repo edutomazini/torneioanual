@@ -2,11 +2,13 @@
 
 Foi utilizado knex (knex.org) para facilitar a criacao e manipulacao de dados.<br><br>
 
+Esta preparado para o uso com MySQL. Mas com alguns ajustes, praticamente inStarlar o modulo do banco desejado, é possivel utilizar outros sistemas de bancos de dados<br><br>
+
 Apos clonar ou baixar o projeto, execute:<br>
 npm install<br><br>
 
-Altere as conexoes do banco no arquivo knesfile.js<br>
-Apos isso, para criar o banco, execute: <br>
+Crie um banco de dados vazio e altere as conexoes do banco no arquivo knesfile.js<br>
+Apos isso, para criar todas as tabelas, execute: <br>
 knex migrate:latest<br><br>
 
 Execute, na pasta 'src':<br>
@@ -18,6 +20,6 @@ https://torneioanual.herokuapp.com/apidoc/<br><br>
 Uma api funcional está publicada em:<br>
 https://torneioanual.herokuapp.com<br><br>
 
-Necessario <i>basic authentication</i>
-username: projeto
-password: senha123
+Necessario <i>basic authentication</i><br>
+username: projeto<br>
+password: senha123<br>

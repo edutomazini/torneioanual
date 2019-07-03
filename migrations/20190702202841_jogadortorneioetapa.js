@@ -9,8 +9,8 @@ exports.up = function(knex, Promise) {
       table.foreign('jogador_id').references('jogador.id')   
       table.integer('pontos').unsigned()
   })
-};
+}
 
 exports.down = function(knex, Promise) {
   return knex.schema.dropTable('jogadortorneioetapa')
-};
+}

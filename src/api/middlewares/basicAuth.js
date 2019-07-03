@@ -2,7 +2,7 @@
 const UserAuth = process.env.AUTH_USER || 'projeto'
 const UserPass = process.env.AUTH_PASS || 'senha123'
 
-module.exports = basicAuth;
+module.exports = basicAuth
 
 async function basicAuth(req, res, next) {
     // basic authentication

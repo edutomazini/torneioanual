@@ -5,7 +5,7 @@ async function getEtapa (id) {
     try {
       const etapa = db.select('*').from('etapa').modify(function (queryBuilder) {
         if (id !== undefined) {
-          queryBuilder.where('id', id);
+          queryBuilder.where('id', id)
         }
       })
         .then(function (results) {

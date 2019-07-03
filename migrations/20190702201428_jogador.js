@@ -4,8 +4,8 @@ exports.up = function(knex, Promise) {
       table.string('nome', 50)
       table.string('cpf', 50)
   })
-};
+}
 
 exports.down = function(knex, Promise) {
   return knex.schema.dropTable('jogador')
-};
+}

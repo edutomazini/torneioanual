@@ -5,7 +5,7 @@ async function getJogador (id) {
     try {
       const jogador = db.select('*').from('jogador').modify(function (queryBuilder) {
         if (id !== undefined) {
-          queryBuilder.where('id', id);
+          queryBuilder.where('id', id)
         }
       })
         .then(function (results) {
