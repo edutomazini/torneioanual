@@ -1,5 +1,6 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
+const basicAuth = require('../middlewares/basicAuth')
 
 const { getJogador, setJogador } = require("../handlers/jogador")
 
@@ -22,7 +23,7 @@ const { getJogador, setJogador } = require("../handlers/jogador")
  * HTTP/1.1 400 Falha ao consultar jogador.
 **/
 
-router.get('/', async (req, res) => {
+router.get('/', basicAuth, async (req, res) => {
   const { id } = req.query
 
   try {
@@ -31,7 +32,7 @@ router.get('/', async (req, res) => {
     res.send(jogador)
   } catch (err) {
     console.log(err)
-    return res.status(400).send({ erro: 'Falha ao consultar jogador. ' + err });
+    return res.status(400).send({ erro: 'Falha ao consultar jogador. ' + err })
   }
 });
 
@@ -54,15 +55,15 @@ router.get('/', async (req, res) => {
  * @apiErrorExample {json} Erro
  * HTTP/1.1 400 Falha ao gravar jogador.
 **/
-router.post('/', async (req, res) => {
+router.post('/', basicAuth, async (req, res) => {
   try {
     const result = await setJogador(req.body)
 
     res.send(result)
   } catch (err) {
     console.log(err)
-    return res.status(400).send({ erro: 'Falha ao gravar jogador. ' + err });
+    return res.status(400).send({ erro: 'Falha ao gravar jogador. ' + err })
   }
 })
 
-module.exports = app => app.use('/api/v1/jogador', router);
+module.exports = app => app.use('/api/v1/jogador', router)

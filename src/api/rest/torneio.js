@@ -1,5 +1,6 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
+const basicAuth = require('../middlewares/basicAuth')
 
 const { getTorneio, setTorneio } = require("../handlers/torneio")
 
@@ -23,7 +24,7 @@ const { getTorneio, setTorneio } = require("../handlers/torneio")
  * HTTP/1.1 400 Falha ao consultar torneio.
 **/
 
-router.get('/', async (req, res) => {
+router.get('/', basicAuth, async (req, res) => {
   const { id } = req.query
 
   try {
@@ -32,9 +33,9 @@ router.get('/', async (req, res) => {
     res.send(torneio)
   } catch (err) {
     console.log(err)
-    return res.status(400).send({ erro: 'Falha ao consultar torneio. ' + err });
+    return res.status(400).send({ erro: 'Falha ao consultar torneio. ' + err })
   }
-});
+})
 
 /**
  * @api {Post} /api/v1/torneio Gravar torneios
@@ -54,15 +55,15 @@ router.get('/', async (req, res) => {
  * @apiErrorExample {json} Erro
  * HTTP/1.1 400 Falha ao gravar torneio.
 **/
-router.post('/', async (req, res) => {
+router.post('/', basicAuth, async (req, res) => {
   try {
     const result = await setTorneio(req.body)
 
     res.send(result)
   } catch (err) {
     console.log(err)
-    return res.status(400).send({ erro: 'Falha ao gravar torneio. ' + err });
+    return res.status(400).send({ erro: 'Falha ao gravar torneio. ' + err })
   }
 })
 
-module.exports = app => app.use('/api/v1/torneio', router);
+module.exports = app => app.use('/api/v1/torneio', router)

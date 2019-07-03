@@ -1,5 +1,6 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
+const basicAuth = require('../middlewares/basicAuth')
 
 const { getEtapa, setEtapa } = require("../handlers/etapa")
 
@@ -23,7 +24,7 @@ const { getEtapa, setEtapa } = require("../handlers/etapa")
  * HTTP/1.1 400 Falha ao consultar etapa.
 **/
 
-router.get('/', async (req, res) => {
+router.get('/', basicAuth, async (req, res) => {
   const { id } = req.query
 
   try {
@@ -32,7 +33,7 @@ router.get('/', async (req, res) => {
     res.send(etapa)
   } catch (err) {
     console.log(err)
-    return res.status(400).send({ erro: 'Falha ao consultar etapa. ' + err });
+    return res.status(400).send({ erro: 'Falha ao consultar etapa. ' + err })
   }
 });
 
@@ -54,14 +55,14 @@ router.get('/', async (req, res) => {
  * @apiErrorExample {json} Erro
  * HTTP/1.1 400 Falha ao gravar etapa.
 **/
-router.post('/', async (req, res) => {
+router.post('/', basicAuth, async (req, res) => {
   try {
     const result = await setEtapa(req.body)
 
     res.send(result)
   } catch (err) {
     console.log(err)
-    return res.status(400).send({ erro: 'Falha ao gravar etapa. ' + err });
+    return res.status(400).send({ erro: 'Falha ao gravar etapa. ' + err })
   }
 })
 
