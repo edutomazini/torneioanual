@@ -2,13 +2,13 @@
 
 Foi utilizado knex (knex.org) para facilitar a criacao e manipulacao de dados.<br><br>
 
-Esta preparado para o uso com MySQL. Mas com alguns ajustes, praticamente inStarlar o modulo do banco desejado, é possivel utilizar outros sistemas de bancos de dados<br><br>
+Foi desenvolvido usando-se o MySQL. Mas com alguns ajustes, praticamente instarlar o modulo do banco desejado, é possivel utilizar outros sistemas de bancos de dados<br><br>
 
 Apos clonar ou baixar o projeto, execute:<br>
 npm install<br><br>
 
 Crie um banco de dados vazio e altere as conexoes do banco no arquivo knesfile.js<br>
-Apos isso, para criar todas as tabelas, execute: <br>
+Apos isso, para criar todas as tabelas e relacionamentos, execute: <br>
 knex migrate:latest<br><br>
 
 Execute, na pasta 'src':<br>
