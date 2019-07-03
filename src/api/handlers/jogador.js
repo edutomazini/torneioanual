@@ -24,7 +24,7 @@ async function getJogadorCpf (cpf) {
 
 async function setJogador (data) {
   const jogador = await getJogadorCpf(data.cpf)
-  if (jogador != null)
+  if (jogador.length != 0)
     throw ('cpf já existe.')
 
   const _id = await db('jogador').insert(data)
