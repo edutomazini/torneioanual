@@ -13,4 +13,7 @@ execute com na pasta 'src':
 node server.js
 
 verifique o help em:
-http://localhost:3000/apidoc/
+https://torneioanual.herokuapp.com/apidoc/
+
+uma api funcional está publicada em:
+https://torneioanual.herokuapp.com
