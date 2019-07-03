@@ -18,7 +18,15 @@ async function getJogador (id) {
   })
 }
 
+async function getJogadorCpf (cpf) {
+  return await db.select('*').from('jogador').where('cpf', cpf)
+}
+
 async function setJogador (data) {
+  const jogador = await getJogadorCpf(data.cpf)
+  if (jogador != null)
+    throw ('cpf já existe.')
+
   const _id = await db('jogador').insert(data)
   return await getJogador(_id[0])
 }
