@@ -1,0 +1,9 @@
+{
+    "name": "torneio Anual",
+    "version": "0.0.1",
+    "description": "Api para Torneio Anual",
+    "apidoc": {
+      "title": "Api para Torneio Anual",
+      "url" : "localhost:3000"
+    }
+  }
