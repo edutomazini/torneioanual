@@ -8,8 +8,8 @@ const { getTorneio, getTorneiosEtapas, setTorneio, setTorneioEtapa, getTorneioRa
  * @api {Get} /api/v1/torneio/:idtorneio/etapa/:idetapa Consultar rank (pontos) de torneios / etapas
  * @apiVersion 0.0.1
  * @apiGroup torneio
- * @apiParam {Number} [idtorneio] id do torneio
- * @apiParam {Number} [idetapa] id da etapa
+ * @apiParam {Number} idtorneio id do torneio
+ * @apiParam {Number} idetapa id da etapa
  * @apiSuccessExample {json} Sucesso
  * HTTP/1.1 200 OK
  * [
@@ -57,7 +57,7 @@ router.get('/:idtorneio/etapa/:idetapa', basicAuth, async (req, res) => {
  * @api {Get} /api/v1/torneio/:idtorneio Consultar rank (pontos gerais) de torneio 
  * @apiVersion 0.0.1
  * @apiGroup torneio
- * @apiParam {Number} [idtorneio] id do torneio
+ * @apiParam {Number} idtorneio id do torneio
  * @apiSuccessExample {json} Sucesso
  * HTTP/1.1 200 OK
  * [
