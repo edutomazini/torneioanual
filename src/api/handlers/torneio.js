@@ -1,5 +1,6 @@
 const db = require('../../config/database')
 const { getEtapa } = require("../handlers/etapa")
+const { asyncForEach } = require('../utils/asyncUtils')
 
 async function getTorneio (id) {
   return new Promise(async (resolve, reject) => {
@@ -19,8 +20,8 @@ async function getTorneio (id) {
   })
 }
 
-async function getTorneios () {
-  return await db.select('torneioetapajogador.id', 'torneio.id as idtorneio', 'torneio.nome as nometorneio', 'etapa.id as idetapa', 'etapa.nome as nomeetapa').from('torneioetapajogador').innerJoin('torneio', 'torneioetapajogador.torneio_id', '=', 'torneio.id').innerJoin('etapa', 'torneioetapajogador.etapa_id', '=', 'etapa.id').whereNull('torneioetapajogador.jogador_id')
+async function getTorneiosEtapas () {
+  return await db.select('torneioetapajogador.id', 'torneio.id as idtorneio', 'torneio.nome as nometorneio', 'etapa.id as idetapa', 'etapa.nome as nomeetapa').from('torneioetapajogador').innerJoin('torneio', 'torneioetapajogador.torneio_id', '=', 'torneio.id').innerJoin('etapa', 'torneioetapajogador.etapa_id', '=', 'etapa.id').whereNull('torneioetapajogador.jogador_id').orderBy('torneioetapajogador.torneio_id').orderBy('torneioetapajogador.etapa_id')
 }
 
 async function getTorneioNome (nome) {
@@ -32,7 +33,7 @@ async function getTorneioEtapa (idtorneio, idetapa) {
 }
 
 async function getTorneioEtapaId (id) {
-  return await db.select('torneioetapajogador.id', 'torneio.id as idtorneio', 'torneio.nome as nometorneio', 'etapa.id as idetapa', 'etapa.nome as nomeetapa').from('torneioetapajogador').innerJoin('torneio', 'torneioetapajogador.torneio_id', '=', 'torneio.id').innerJoin('etapa', 'torneioetapajogador.etapa_id', '=', 'etapa.id').where('torneioetapajogador.id', id).orderBy('torneioetapajogador.torneio_id','torneioetapajogador.etapa_id')
+  return await db.select('torneioetapajogador.id', 'torneio.id as idtorneio', 'torneio.nome as nometorneio', 'etapa.id as idetapa', 'etapa.nome as nomeetapa').from('torneioetapajogador').innerJoin('torneio', 'torneioetapajogador.torneio_id', '=', 'torneio.id').innerJoin('etapa', 'torneioetapajogador.etapa_id', '=', 'etapa.id').where('torneioetapajogador.id', id).orderBy('torneioetapajogador.torneio_id').orderBy('torneioetapajogador.etapa_id')
 }
 
 async function setTorneio (data) {
@@ -42,6 +43,21 @@ async function setTorneio (data) {
 
   const _id = await db('torneio').insert(data)
   return await getTorneio(_id[0])
+}
+
+async function getTorneioRank (idtorneio, idetapa) {
+  if (idtorneio === undefined || idetapa === undefined)
+    throw ('Dados incorretos.')
+
+  let jogadores = await db.select('torneioetapajogador.id', 'torneio.id as idtorneio', 'torneio.nome as nometorneio', 'etapa.id as idetapa', 'etapa.nome as nomeetapa', 'jogador.id as idjogador', 'jogador.nome as nomejogador', 'torneioetapajogador.score as score').from('torneioetapajogador').innerJoin('torneio', 'torneioetapajogador.torneio_id', '=', 'torneio.id').innerJoin('etapa', 'torneioetapajogador.etapa_id', '=', 'etapa.id').innerJoin('jogador', 'torneioetapajogador.jogador_id', '=', 'jogador.id').whereNotNull('torneioetapajogador.jogador_id').andWhere('torneioetapajogador.etapa_id', idetapa).andWhere('torneioetapajogador.torneio_id', idtorneio).orderBy('score')
+
+  let i = 1
+  await asyncForEach(jogadores, async (jogador) => {
+    jogador.pontos = i
+    i = i + 1
+  })
+
+  return jogadores
 }
 
 async function setTorneioEtapa (idtorneio, idetapa) {
@@ -67,4 +83,5 @@ async function setTorneioEtapa (idtorneio, idetapa) {
 exports.getTorneio = getTorneio
 exports.setTorneio = setTorneio
 exports.setTorneioEtapa = setTorneioEtapa
-exports.getTorneios = getTorneios
+exports.getTorneiosEtapas = getTorneiosEtapas
+exports.getTorneioRank = getTorneioRank

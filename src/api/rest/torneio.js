@@ -2,7 +2,56 @@ const express = require('express')
 const router = express.Router()
 const basicAuth = require('../middlewares/basicAuth')
 
-const { getTorneio,getTorneios, setTorneio, setTorneioEtapa } = require("../handlers/torneio")
+const { getTorneio, getTorneiosEtapas, setTorneio, setTorneioEtapa, getTorneioRank } = require("../handlers/torneio")
+
+/**
+ * @api {Get} /api/v1/torneio/:idtorneio/etapa/:idetapa Consultar rank (pontos) de torneios / etapas
+ * @apiVersion 0.0.1
+ * @apiGroup torneio
+ * @apiParam {Number} [idtorneio] id do torneio
+ * @apiParam {Number} [idetapa] id da etapa
+ * @apiSuccessExample {json} Sucesso
+ * HTTP/1.1 200 OK
+ * [
+ *    {
+ *      "id": 14,
+ *      "idtorneio": 1,
+ *      "nometorneio": "torneio mensal",
+ *      "idetapa": 1,
+ *      "nomeetapa": "etapa 1",
+ *      "idjogador": 2,
+ *      "nomejogador": "eduardo",
+ *      "score": 10,
+ *      "pontos": 1
+ *    },
+ *    {
+ *      "id": 11,
+ *      "idtorneio": 1,
+ *      "nometorneio": "torneio mensal",
+ *      "idetapa": 1,
+ *      "nomeetapa": "etapa 1",
+ *      "idjogador": 1,
+ *      "nomejogador": "juca",
+ *      "score": 12,
+ *      "pontos": 2
+ *  }
+ * ]
+ * @apiErrorExample {json} Erro
+ * HTTP/1.1 400 Falha ao consultar torneio.
+**/
+
+router.get('/:idtorneio/etapa/:idetapa', basicAuth, async (req, res) => {
+  const { idtorneio, idetapa } = req.params
+
+  try {
+    const torneio = await getTorneioRank(idtorneio, idetapa)
+
+    res.send(torneio)
+  } catch (err) {
+    console.log(err)
+    return res.status(400).send({ erro: 'Falha ao consultar pontos. ' + err })
+  }
+})
 
 /**
  * @api {Get} /api/v1/torneio Consultar torneios
@@ -38,7 +87,7 @@ router.get('/', basicAuth, async (req, res) => {
 })
 
 /**
- * @api {Get} /api/v1/torneio/torneios Consultar todos torneios e etapas
+ * @api {Get} /api/v1/torneio/torneiosetapas Consultar todos torneios e etapas
  * @apiVersion 0.0.1
  * @apiGroup torneio
 
@@ -78,11 +127,10 @@ router.get('/', basicAuth, async (req, res) => {
  * HTTP/1.1 400 Falha ao consultar torneio.
 **/
 
-router.get('/torneios', basicAuth, async (req, res) => {
-  const { id } = req.query
+router.get('/torneiosetapas', basicAuth, async (req, res) => {
 
   try {
-    const torneio = await getTorneios()
+    const torneio = await getTorneiosEtapas()
 
     res.send(torneio)
   } catch (err) {
@@ -140,7 +188,7 @@ router.post('/', basicAuth, async (req, res) => {
  * HTTP/1.1 400 Falha ao gravar torneio etapa.
 **/
 router.post('/:idtorneio/etapa/:idetapa', basicAuth, async (req, res) => {
-  const {idtorneio, idetapa} = req.params
+  const { idtorneio, idetapa } = req.params
   try {
     const result = await setTorneioEtapa(idtorneio, idetapa)
 
