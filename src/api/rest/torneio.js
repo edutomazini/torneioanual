@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const basicAuth = require('../middlewares/basicAuth')
 
-const { getTorneio, setTorneio } = require("../handlers/torneio")
+const { getTorneio,getTorneios, setTorneio, setTorneioEtapa } = require("../handlers/torneio")
 
 /**
  * @api {Get} /api/v1/torneio Consultar torneios
@@ -38,6 +38,60 @@ router.get('/', basicAuth, async (req, res) => {
 })
 
 /**
+ * @api {Get} /api/v1/torneio/torneios Consultar todos torneios e etapas
+ * @apiVersion 0.0.1
+ * @apiGroup torneio
+
+ * @apiSuccessExample {json} Sucesso
+ * HTTP/1.1 200 OK
+ * [
+ *  {
+ *    "id": 7,
+ *    "idtorneio": 1,
+ *    "nometorneio": "torneio mensal",
+ *    "idetapa": 1,
+ *    "nomeetapa": "etapa 3"
+ *  },
+ *  {
+ *    "id": 8,
+ *    "idtorneio": 2,
+ *    "nometorneio": "torneio semanal",
+ *    "idetapa": 1,
+ *    "nomeetapa": "etapa 3"
+ *  },
+ *  {
+ *    "id": 9,
+ *    "idtorneio": 2,
+ *    "nometorneio": "torneio semanal",
+ *    "idetapa": 2,
+ *    "nomeetapa": "etapa 1"
+ *  },
+ *  {
+ *    "id": 10,
+ *    "idtorneio": 2,
+ *    "nometorneio": "torneio semanal",
+ *    "idetapa": 3,
+ *    "nomeetapa": "etapa 2"
+ *  }
+ * ]
+ * @apiErrorExample {json} Erro
+ * HTTP/1.1 400 Falha ao consultar torneio.
+**/
+
+router.get('/torneios', basicAuth, async (req, res) => {
+  const { id } = req.query
+
+  try {
+    const torneio = await getTorneios()
+
+    res.send(torneio)
+  } catch (err) {
+    console.log(err)
+    return res.status(400).send({ erro: 'Falha ao consultar torneio. ' + err })
+  }
+})
+
+/**
  * @api {Post} /api/v1/torneio Gravar torneios
  * @apiVersion 0.0.1
  * @apiGroup torneio
@@ -58,6 +112,37 @@ router.get('/', basicAuth, async (req, res) => {
 router.post('/', basicAuth, async (req, res) => {
   try {
     const result = await setTorneio(req.body)
+
+    res.send(result)
+  } catch (err) {
+    console.log(err)
+    return res.status(400).send({ erro: 'Falha ao gravar torneio. ' + err })
+  }
+})
+
+/**
+ * @api {Post} /api/v1/torneio/:idtorneio/etapa/:idetapa Associar torneios e etapas
+ * @apiVersion 0.0.1
+ * @apiGroup torneio
+ * @apiParam {Number} idtorneio id do torneio
+ * @apiParam {Number} idetapa id da etapa
+ * @apiSuccessExample {json} Sucesso
+ * HTTP/1.1 200 OK
+ * [
+ *  {
+ *    "idtorneio": 1,
+ *    "nometorneio": "torneio mensal",
+ *    "idetapa": 1,
+ *    "nomeetapa": "etapa 3"
+ *  }
+ * ]
+ * @apiErrorExample {json} Erro
+ * HTTP/1.1 400 Falha ao gravar torneio etapa.
+**/
+router.post('/:idtorneio/etapa/:idetapa', basicAuth, async (req, res) => {
+  const {idtorneio, idetapa} = req.params
+  try {
+    const result = await setTorneioEtapa(idtorneio, idetapa)
 
     res.send(result)
   } catch (err) {

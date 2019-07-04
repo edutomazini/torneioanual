@@ -2,7 +2,7 @@
 
 Foi utilizado knex (knex.org) para facilitar a criacao e manipulacao de dados.<br><br>
 
-Foi desenvolvido usando-se o MySQL. Mas com alguns ajustes, praticamente instalar o modulo do banco desejado, é possivel utilizar outros sistemas de bancos de dados<br><br>
+Foi desenvolvido usando-se o MySQL. Mas com alguns ajustes, praticamente instalar o modulo do banco desejado, sera possivel utilizar outros sistemas de bancos de dados<br><br>
 
 Apos clonar ou baixar o projeto, execute:<br>
 <b>npm install</b><br><br>
