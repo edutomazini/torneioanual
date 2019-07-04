@@ -81,7 +81,7 @@ router.get('/:idtorneio/etapa/:idetapa', basicAuth, async (req, res) => {
  *     "idtorneio": 1,
  *     "nometorneio": "torneio mensal",
  *     "idjogador": 1,
- *     "nomejogador": "juca",s
+ *     "nomejogador": "juca",
  *     "score": 1,
  *     "pontos": 1
  *   },
