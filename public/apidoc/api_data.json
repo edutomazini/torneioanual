@@ -330,7 +330,55 @@
   },
   {
     "type": "Get",
-    "url": "/api/v1/torneio/torneios",
+    "url": "/api/v1/torneio/:idtorneio/etapa/:idetapa",
+    "title": "Consultar rank (pontos) de torneios / etapas",
+    "version": "0.0.1",
+    "group": "torneio",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "idtorneio",
+            "description": "<p>id do torneio</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "idetapa",
+            "description": "<p>id da etapa</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Sucesso",
+          "content": "HTTP/1.1 200 OK\n[\n   {\n     \"id\": 14,\n     \"idtorneio\": 1,\n     \"nometorneio\": \"torneio mensal\",\n     \"idetapa\": 1,\n     \"nomeetapa\": \"etapa 1\",\n     \"idjogador\": 2,\n     \"nomejogador\": \"eduardo\",\n     \"score\": 10,\n     \"pontos\": 1\n   },\n   {\n     \"id\": 11,\n     \"idtorneio\": 1,\n     \"nometorneio\": \"torneio mensal\",\n     \"idetapa\": 1,\n     \"nomeetapa\": \"etapa 1\",\n     \"idjogador\": 1,\n     \"nomejogador\": \"juca\",\n     \"score\": 12,\n     \"pontos\": 2\n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Erro",
+          "content": "HTTP/1.1 400 Falha ao consultar torneio.",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api/rest/torneio.js",
+    "groupTitle": "torneio",
+    "name": "GetApiV1TorneioIdtorneioEtapaIdetapa"
+  },
+  {
+    "type": "Get",
+    "url": "/api/v1/torneio/torneiosetapas",
     "title": "Consultar todos torneios e etapas",
     "version": "0.0.1",
     "group": "torneio",
@@ -354,7 +402,7 @@
     },
     "filename": "src/api/rest/torneio.js",
     "groupTitle": "torneio",
-    "name": "GetApiV1TorneioTorneios"
+    "name": "GetApiV1TorneioTorneiosetapas"
   },
   {
     "type": "Post",
