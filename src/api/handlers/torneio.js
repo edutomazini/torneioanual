@@ -1,6 +1,7 @@
 const db = require('../../config/database')
 const { getEtapa } = require("../handlers/etapa")
 const { asyncForEach } = require('../utils/asyncUtils')
+const lodash = require('lodash')
 
 async function getTorneio (id) {
   return new Promise(async (resolve, reject) => {
@@ -81,7 +82,22 @@ async function getTorneioRankGeral (idtorneio) {
 
   })
 
-  return jogadores
+  let _jogador = []
+  let idjogador = 0
+  await asyncForEach(jogadores, async (jogadorfinal) => {
+    if (idjogador != jogadorfinal.idjogador) {
+      idjogador = jogadorfinal.idjogador
+      _jogador.push({
+        'idtorneio': jogadorfinal.idtorneio,
+        'nometorneio': jogadorfinal.nometorneio,
+        'idjogador': jogadorfinal.idjogador,
+        'nomejogador': jogadorfinal.nomejogador,
+        'pontosfinal': jogadorfinal.pontostotal = lodash.sumBy(lodash.filter(jogadores, { 'idjogador': idjogador }), x => x.pontos)
+      })
+    }
+  })
+
+  return lodash.uniqBy(_jogador, 'idjogador')
 }
 
 async function setTorneioEtapa (idtorneio, idetapa) {

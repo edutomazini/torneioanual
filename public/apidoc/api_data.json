@@ -340,7 +340,7 @@
           {
             "group": "Parameter",
             "type": "Number",
-            "optional": true,
+            "optional": false,
             "field": "idtorneio",
             "description": "<p>id do torneio</p>"
           }
@@ -351,7 +351,7 @@
       "examples": [
         {
           "title": "Sucesso",
-          "content": "HTTP/1.1 200 OK\n[\n  {\n    \"idtorneio\": 1,\n    \"nometorneio\": \"torneio mensal\",\n    \"idjogador\": 2,\n    \"nomejogador\": \"eduardo\",\n    \"score\": 10,\n    \"pontos\": 1\n  },\n  {\n    \"idtorneio\": 1,\n    \"nometorneio\": \"torneio mensal\",\n    \"idjogador\": 1,\n    \"nomejogador\": \"juca\",\n    \"score\": 12,\n    \"pontos\": 2\n  },\n  {\n    \"idtorneio\": 1,\n    \"nometorneio\": \"torneio mensal\",\n    \"idjogador\": 1,\n    \"nomejogador\": \"juca\",s\n    \"score\": 1,\n    \"pontos\": 1\n  },\n  {\n    \"idtorneio\": 1,\n    \"nometorneio\": \"torneio mensal\",\n    \"idjogador\": 2,\n    \"nomejogador\": \"eduardo\",\n    \"score\": 5,\n    \"pontos\": 2\n  }\n]",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n    \"idtorneio\": 1,\n    \"nometorneio\": \"torneio mensal\",\n    \"idjogador\": 2,\n    \"nomejogador\": \"eduardo\",\n    \"pontosfinal\": 1\n  },\n  {\n    \"idtorneio\": 1,\n    \"nometorneio\": \"torneio mensal\",\n    \"idjogador\": 1,\n    \"nomejogador\": \"juca\",\n    \"pontosfinal\": 2\n  }\n]",
           "type": "json"
         }
       ]
@@ -381,14 +381,14 @@
           {
             "group": "Parameter",
             "type": "Number",
-            "optional": true,
+            "optional": false,
             "field": "idtorneio",
             "description": "<p>id do torneio</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
-            "optional": true,
+            "optional": false,
             "field": "idetapa",
             "description": "<p>id da etapa</p>"
           }

@@ -66,32 +66,14 @@ router.get('/:idtorneio/etapa/:idetapa', basicAuth, async (req, res) => {
  *     "nometorneio": "torneio mensal",
  *     "idjogador": 2,
  *     "nomejogador": "eduardo",
- *     "score": 10,
- *     "pontos": 1
+ *     "pontosfinal": 1
  *   },
  *   {
  *     "idtorneio": 1,
  *     "nometorneio": "torneio mensal",
  *     "idjogador": 1,
  *     "nomejogador": "juca",
- *     "score": 12,
- *     "pontos": 2
- *   },
- *   {
- *     "idtorneio": 1,
- *     "nometorneio": "torneio mensal",
- *     "idjogador": 1,
- *     "nomejogador": "juca",
- *     "score": 1,
- *     "pontos": 1
- *   },
- *   {
- *     "idtorneio": 1,
- *     "nometorneio": "torneio mensal",
- *     "idjogador": 2,
- *     "nomejogador": "eduardo",
- *     "score": 5,
- *     "pontos": 2
+ *     "pontosfinal": 2
  *   }
  * ]
  * @apiErrorExample {json} Erro
