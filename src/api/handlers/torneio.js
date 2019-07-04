@@ -60,6 +60,30 @@ async function getTorneioRank (idtorneio, idetapa) {
   return jogadores
 }
 
+async function getTorneioRankGeral (idtorneio) {
+  if (idtorneio === undefined)
+    throw ('Dados incorretos.')
+
+  let jogadores = []
+  let jogadoresetapa
+
+  const etapas = await db.select('etapa.id as idetapa').from('torneioetapajogador').innerJoin('torneio', 'torneioetapajogador.torneio_id', '=', 'torneio.id').innerJoin('etapa', 'torneioetapajogador.etapa_id', '=', 'etapa.id').whereNull('torneioetapajogador.jogador_id').where('torneioetapajogador.torneio_id', idtorneio).orderBy('torneioetapajogador.torneio_id').orderBy('torneioetapajogador.etapa_id')
+
+  await asyncForEach(etapas, async (etapa) => {
+    jogadoresetapa = await db.select('torneio.id as idtorneio', 'torneio.nome as nometorneio', 'jogador.id as idjogador', 'jogador.nome as nomejogador', 'torneioetapajogador.score as score').from('torneioetapajogador').innerJoin('torneio', 'torneioetapajogador.torneio_id', '=', 'torneio.id').innerJoin('etapa', 'torneioetapajogador.etapa_id', '=', 'etapa.id').innerJoin('jogador', 'torneioetapajogador.jogador_id', '=', 'jogador.id').whereNotNull('torneioetapajogador.jogador_id').andWhere('torneioetapajogador.etapa_id', etapa.idetapa).andWhere('torneioetapajogador.torneio_id', idtorneio).orderBy('score')
+
+    let i = 1
+    await asyncForEach(jogadoresetapa, async (jogador) => {
+      jogador.pontos = i
+      i = i + 1
+      jogadores.push(jogador)
+    })
+
+  })
+
+  return jogadores
+}
+
 async function setTorneioEtapa (idtorneio, idetapa) {
   const torneioEtapa = await getTorneioEtapa(idtorneio, idetapa)
   if (torneioEtapa.length != 0)
@@ -85,3 +109,4 @@ exports.setTorneio = setTorneio
 exports.setTorneioEtapa = setTorneioEtapa
 exports.getTorneiosEtapas = getTorneiosEtapas
 exports.getTorneioRank = getTorneioRank
+exports.getTorneioRankGeral = getTorneioRankGeral

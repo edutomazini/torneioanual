@@ -35,7 +35,7 @@ router.get('/', basicAuth, async (req, res) => {
     console.log(err)
     return res.status(400).send({ erro: 'Falha ao consultar etapa. ' + err })
   }
-});
+})
 
 /**
  * @api {Post} /api/v1/etapa Gravar etapas
@@ -66,4 +66,4 @@ router.post('/', basicAuth, async (req, res) => {
   }
 })
 
-module.exports = app => app.use('/api/v1/etapa', router);
+module.exports = app => app.use('/api/v1/etapa', router)

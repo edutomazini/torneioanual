@@ -330,6 +330,47 @@ define({ "api": [
   },
   {
     "type": "Get",
+    "url": "/api/v1/torneio/:idtorneio",
+    "title": "Consultar rank (pontos gerais) de torneio",
+    "version": "0.0.1",
+    "group": "torneio",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "idtorneio",
+            "description": "<p>id do torneio</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Sucesso",
+          "content": "HTTP/1.1 200 OK\n[\n   {\n     \"idtorneio\": 1,\n     \"nometorneio\": \"torneio mensal\",\n     \"idjogador\": 2,\n     \"nomejogador\": \"eduardo\",\n     \"somadepontos\": 3\n   },\n   {\n     \"idtorneio\": 1,\n     \"nometorneio\": \"torneio mensal\",\n     \"idetapa\": 1,\n     \"idjogador\": 1,\n     \"nomejogador\": \"juca\",\n     \"somadepontos\": 4\n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Erro",
+          "content": "HTTP/1.1 400 Falha ao consultar torneio.",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api/rest/torneio.js",
+    "groupTitle": "torneio",
+    "name": "GetApiV1TorneioIdtorneio"
+  },
+  {
+    "type": "Get",
     "url": "/api/v1/torneio/:idtorneio/etapa/:idetapa",
     "title": "Consultar rank (pontos) de torneios / etapas",
     "version": "0.0.1",

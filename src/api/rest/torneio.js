@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const basicAuth = require('../middlewares/basicAuth')
 
-const { getTorneio, getTorneiosEtapas, setTorneio, setTorneioEtapa, getTorneioRank } = require("../handlers/torneio")
+const { getTorneio, getTorneiosEtapas, setTorneio, setTorneioEtapa, getTorneioRank, getTorneioRankGeral } = require("../handlers/torneio")
 
 /**
  * @api {Get} /api/v1/torneio/:idtorneio/etapa/:idetapa Consultar rank (pontos) de torneios / etapas
@@ -45,6 +45,47 @@ router.get('/:idtorneio/etapa/:idetapa', basicAuth, async (req, res) => {
 
   try {
     const torneio = await getTorneioRank(idtorneio, idetapa)
+
+    res.send(torneio)
+  } catch (err) {
+    console.log(err)
+    return res.status(400).send({ erro: 'Falha ao consultar pontos. ' + err })
+  }
+})
+
+/**
+ * @api {Get} /api/v1/torneio/:idtorneio Consultar rank (pontos gerais) de torneio 
+ * @apiVersion 0.0.1
+ * @apiGroup torneio
+ * @apiParam {Number} [idtorneio] id do torneio
+ * @apiSuccessExample {json} Sucesso
+ * HTTP/1.1 200 OK
+ * [
+ *    {
+ *      "idtorneio": 1,
+ *      "nometorneio": "torneio mensal",
+ *      "idjogador": 2,
+ *      "nomejogador": "eduardo",
+ *      "somadepontos": 3
+ *    },
+ *    {
+ *      "idtorneio": 1,
+ *      "nometorneio": "torneio mensal",
+ *      "idetapa": 1,
+ *      "idjogador": 1,
+ *      "nomejogador": "juca",
+ *      "somadepontos": 4
+ *  }
+ * ]
+ * @apiErrorExample {json} Erro
+ * HTTP/1.1 400 Falha ao consultar torneio.
+**/
+
+router.get('/:idtorneio', basicAuth, async (req, res) => {
+  const { idtorneio, idetapa } = req.params
+
+  try {
+    const torneio = await getTorneioRankGeral(idtorneio)
 
     res.send(torneio)
   } catch (err) {
