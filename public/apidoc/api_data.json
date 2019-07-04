@@ -351,7 +351,7 @@
       "examples": [
         {
           "title": "Sucesso",
-          "content": "HTTP/1.1 200 OK\n[\n   {\n     \"idtorneio\": 1,\n     \"nometorneio\": \"torneio mensal\",\n     \"idjogador\": 2,\n     \"nomejogador\": \"eduardo\",\n     \"somadepontos\": 3\n   },\n   {\n     \"idtorneio\": 1,\n     \"nometorneio\": \"torneio mensal\",\n     \"idetapa\": 1,\n     \"idjogador\": 1,\n     \"nomejogador\": \"juca\",\n     \"somadepontos\": 4\n }\n]",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n    \"idtorneio\": 1,\n    \"nometorneio\": \"torneio mensal\",\n    \"idjogador\": 2,\n    \"nomejogador\": \"eduardo\",\n    \"score\": 10,\n    \"pontos\": 1\n  },\n  {\n    \"idtorneio\": 1,\n    \"nometorneio\": \"torneio mensal\",\n    \"idjogador\": 1,\n    \"nomejogador\": \"juca\",\n    \"score\": 12,\n    \"pontos\": 2\n  },\n  {\n    \"idtorneio\": 1,\n    \"nometorneio\": \"torneio mensal\",\n    \"idjogador\": 1,\n    \"nomejogador\": \"juca\",s\n    \"score\": 1,\n    \"pontos\": 1\n  },\n  {\n    \"idtorneio\": 1,\n    \"nometorneio\": \"torneio mensal\",\n    \"idjogador\": 2,\n    \"nomejogador\": \"eduardo\",\n    \"score\": 5,\n    \"pontos\": 2\n  }\n]",
           "type": "json"
         }
       ]

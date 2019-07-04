@@ -61,21 +61,38 @@ router.get('/:idtorneio/etapa/:idetapa', basicAuth, async (req, res) => {
  * @apiSuccessExample {json} Sucesso
  * HTTP/1.1 200 OK
  * [
- *    {
- *      "idtorneio": 1,
- *      "nometorneio": "torneio mensal",
- *      "idjogador": 2,
- *      "nomejogador": "eduardo",
- *      "somadepontos": 3
- *    },
- *    {
- *      "idtorneio": 1,
- *      "nometorneio": "torneio mensal",
- *      "idetapa": 1,
- *      "idjogador": 1,
- *      "nomejogador": "juca",
- *      "somadepontos": 4
- *  }
+ *   {
+ *     "idtorneio": 1,
+ *     "nometorneio": "torneio mensal",
+ *     "idjogador": 2,
+ *     "nomejogador": "eduardo",
+ *     "score": 10,
+ *     "pontos": 1
+ *   },
+ *   {
+ *     "idtorneio": 1,
+ *     "nometorneio": "torneio mensal",
+ *     "idjogador": 1,
+ *     "nomejogador": "juca",
+ *     "score": 12,
+ *     "pontos": 2
+ *   },
+ *   {
+ *     "idtorneio": 1,
+ *     "nometorneio": "torneio mensal",
+ *     "idjogador": 1,
+ *     "nomejogador": "juca",s
+ *     "score": 1,
+ *     "pontos": 1
+ *   },
+ *   {
+ *     "idtorneio": 1,
+ *     "nometorneio": "torneio mensal",
+ *     "idjogador": 2,
+ *     "nomejogador": "eduardo",
+ *     "score": 5,
+ *     "pontos": 2
+ *   }
  * ]
  * @apiErrorExample {json} Erro
  * HTTP/1.1 400 Falha ao consultar torneio.
