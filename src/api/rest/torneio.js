@@ -42,7 +42,7 @@ const { getTorneio, getTorneiosEtapas, setTorneio, setTorneioEtapa, getTorneioRa
 
 router.get('/:idtorneio/etapa/:idetapa', basicAuth, async (req, res) => {
   const { idtorneio, idetapa } = req.params
-
+  
   try {
     const torneio = await getTorneioRank(idtorneio, idetapa)
 
@@ -80,8 +80,8 @@ router.get('/:idtorneio/etapa/:idetapa', basicAuth, async (req, res) => {
  * HTTP/1.1 400 Falha ao consultar torneio.
 **/
 
-router.get('/:idtorneio', basicAuth, async (req, res) => {
-  const { idtorneio, idetapa } = req.params
+router.get('/rank/:idtorneio/', basicAuth, async (req, res) => {
+  const { idtorneio } = req.params
 
   try {
     const torneio = await getTorneioRankGeral(idtorneio)

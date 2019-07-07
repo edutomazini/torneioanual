@@ -1,6 +1,6 @@
 const db = require('../../config/database')
 const { getEtapa } = require("../handlers/etapa")
-const { getTorneio } = require("../handlers/torneio")
+const { getTorneio, getTorneioEtapa } = require("../handlers/torneio")
 
 async function getJogador (id) {
   return new Promise(async (resolve, reject) => {
@@ -35,6 +35,10 @@ async function setJogadortorneio (data) {
   const etapa = await getEtapa(data.idetapa)
   if (etapa.length == 0)
     throw ('etapa nao existe.')
+
+  const torneioEtapa = getTorneioEtapa(data.idtorneio, data.idetapa)
+  if (torneioEtapa.length == 0)
+  throw ('toneio / etapa nao cadastrado.')
 
   const score = (data.score === undefined ? 0 : data.score)
 

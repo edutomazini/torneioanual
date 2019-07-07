@@ -123,6 +123,7 @@ async function setTorneioEtapa (idtorneio, idetapa) {
 exports.getTorneio = getTorneio
 exports.setTorneio = setTorneio
 exports.setTorneioEtapa = setTorneioEtapa
+exports.getTorneioEtapa = getTorneioEtapa
 exports.getTorneiosEtapas = getTorneiosEtapas
 exports.getTorneioRank = getTorneioRank
 exports.getTorneioRankGeral = getTorneioRankGeral
